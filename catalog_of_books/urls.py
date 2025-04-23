@@ -24,5 +24,8 @@ urlpatterns = [
     path('', views.show_main, name="show_main"), #http://127.0.0.1:8000/
     path('info/', views.show_list_of_books, name="show_list_of_books"), #http://127.0.0.1:8000/info
     path('news/', views.show_news, name="show_news"), #http://127.0.0.1:8000/news
-    path('search/<str:genre>/', views.search_books, name="search_books") #http://127.0.0.1:8000/search/роман
+    path('search/by_genre/<str:genre>/', views.search_books_by_genre, name="search_books_by_genre"), #http://127.0.0.1:8000/search/by_genre/роман
+    path('search/by_id/<int:book_id>/', views.show_book_by_id, name='show_book_by_id'), #http://127.0.0.1:8000/search/by_id/1
+    path('search/by_piece_of_name/<str:piece_of_name>/', views.search_books_by_piece_of_name, name="search_books_by_piece_of_name"), #http://127.0.0.1:8000/search/by_piece_of_name/при
+    path('filter/', views.filter_by_price, name='filter_by_price')#http://127.0.0.1:8000/filter?min_price=180&max_price=230
 ]
