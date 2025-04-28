@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Список машин</title>
+</head>
+<body>
+<h1>Інформація про машини</h1>
+{% if cars %}
+<ol>
+    {% for car_id, car in cars.items%}
+        <li>
+            <strong><a href="/car/{{car_id}}/">ID: {{car_id}}</a></strong>
+            <ul>
+                {% for key, value in car.items%}
+                    <li>{{key}}: {{value}}</li>
+                {% endfor%}
+            </ul>
+        </li>
+    {% endfor%}
+</ol>
+{% endif %}
+</body>
+</html>

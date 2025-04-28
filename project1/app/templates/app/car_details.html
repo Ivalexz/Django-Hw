@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Інформація про машину</title>
+    <style>
+        td, th {
+            border: 1px solid black;
+            text-align: left;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+
+{% if car %}
+<h2>Інформація про машину</h2>
+<table>
+  <tr>
+    <th>ID машини: {{ car_id }}</th>
+  </tr>
+  <tr>
+      <td>Марка</td>
+      <td>{{ car.Марка }}</td>
+  </tr>
+  <tr>
+    <td>Модель</td>
+      <td>{{ car.Модель }}</td>
+  </tr>
+    <tr>
+      <td>Рік</td>
+      <td>{{ car.Рік }}</td>
+  </tr>
+    <tr>
+      <td>Ціна</td>
+      <td>{{ car.Ціна }}$</td>
+  </tr>
+</table>
+{% else %}
+    <h2>Помилка! Машину з ID {{car_id}} не знайдено</h2>
+{% endif %}
+<a href="http://127.0.0.1:8000/info"> <= Back to car list</a>
+</body>
+</html>
