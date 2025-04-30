@@ -10,22 +10,12 @@
   <tr>
     <th>ID машини: {{ car_id }}</th>
   </tr>
+  {% for key, value in car.items %}
   <tr>
-      <td>Марка</td>
-      <td>{{ car.Марка }}</td>
+    <td>{{ key }}</td>
+    <td>{{ value }}</td>
   </tr>
-  <tr>
-    <td>Модель</td>
-      <td>{{ car.Модель }}</td>
-  </tr>
-    <tr>
-      <td>Рік</td>
-      <td>{{ car.Рік }}</td>
-  </tr>
-    <tr>
-      <td>Ціна</td>
-      <td>{{ car.Ціна }}$</td>
-  </tr>
+  {% endfor %}
 </table>
 {% else %}
     <h2>Помилка! Машину з ID {{car_id}} не знайдено</h2>
