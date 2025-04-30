@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+
+{% block title %} Search results {% endblock %}
+
+{% block content %}
+<h2>Результати пошуку</h2>
+
+<p>Знайдено авто з ціною від <strong>{{ min_price|default:0 }}</strong> до <strong>{{ max_price|default:"БЕЗ ОБМЕЖЕНЬ" }}</strong></p>
+
+{% if filtered_cars %}
+<h3>Знайдено авто: {{ filtered_cars|length }}</h3>
+<ol>
+    {% for car in filtered_cars %}
+    <li>
+        <ul>
+            {% for key, value in car.items %}
+            <li>{{ key|upper }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>Нічого не знайдено.</p>
+{% endif %}
+
+{% endblock %}

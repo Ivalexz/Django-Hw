@@ -1,3 +1,4 @@
+from django.contrib.gis.geos.libgeos import CONTEXT_PTR
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -6,19 +7,19 @@ cars = {
         "Марка": "VW",
         "Модель": "Passat b5",
         "Рік": "2007",
-        "Ціна": "5000"
+        "Ціна": 5000
     },
     2: {
         "Марка": "VW",
         "Модель": "Golf 5",
         "Рік": "2012",
-        "Ціна": "7000"
+        "Ціна": 7000
     },
     3: {
         "Марка": "Audi",
         "Модель": "A4",
         "Рік": "2012",
-        "Ціна": "12000"
+        "Ціна": 12000
     }
 }
 
@@ -37,32 +38,23 @@ def search_cars(request):
     min_price = request.GET.get("min_price", "0")
     max_price = request.GET.get("max_price", "999999")
 
+    filtered_cars = []
+
     try:
         min_price = int(min_price)
         max_price = int(max_price)
-    except ValueError:
-        return HttpResponse("Некоректні параметри ціни")
-
-    filtered_cars = []
-
-    for car_id, car in cars.items():
-        try:
-            price = int(car["Ціна($)"].replace("$", ""))
-            if min_price <= price <= max_price:
+        for car_id, car in cars.items():
+            if min_price <= car["Ціна"] <= max_price:
                 filtered_cars.append(car)
-        except ValueError:
-            continue
+    except ValueError:
+        pass
 
-    result = "<h2>Знайдені авто:</h2>"
-    if filtered_cars:
-        result += "<ul>"
-        for car in filtered_cars:
-            result += f"<li>Марка: {car['Марка']}, Модель: {car['Модель']}, Рік: {car['Рік']}, Ціна: ${car['Ціна($)']}</li>"
-        result += "</ul>"
-    else:
-        result += "<p>Авто не знайдено за заданими критеріями.</p>"
-
-    return HttpResponse(result)
+    context={
+        'min_price':min_price,
+        'max_price': max_price,
+        'filtered_cars': filtered_cars
+    }
+    return render(request, 'app/search_cars.html', context)
 
 
 def hello_world(request):

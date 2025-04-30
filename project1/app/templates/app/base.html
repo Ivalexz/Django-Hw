@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>{% block title %} Автомобільний каталог {% endblock %}</title>
+    <style>
+        body {
+            background: beige;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            color: white;
+            background-color: #333
+        }
+
+        footer {
+            color: white;
+            background: burlywood;
+            text-align: center;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        div{
+            float: left;
+        }
+        li {
+<!--            float: left;-->
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <div><li><a href="/">Головна</a></li></div>
+            <div><li><a href="/info">Каталог</a></li></div>
+            <div><li><a href="/car/search">Пошук</a></li></div>
+        </ul>
+    </nav>
+</header>
+
+{% block content %} {% endblock %}
+
+<footer>ITSTEP. All rights reserved. </footer>
+</body>
+</html>

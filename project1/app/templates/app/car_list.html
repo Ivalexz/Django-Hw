@@ -1,14 +1,15 @@
-<html>
-<head>
-    <title>Список машин</title>
-</head>
-<body>
+{% extends 'app/base.html' %}
+
+{% block title %} Список машин {% endblock %}
+
+{% block content %}
+
 <h1>Інформація про машини</h1>
 {% if cars %}
 <ol>
     {% for car_id, car in cars.items%}
         <li>
-            <strong><a href="/car/{{car_id}}/">ID: {{car_id}}</a></strong>
+            <strong><a href="{% url 'app:show_car_by_id' car_id=car_id %}">ID: {{car_id}}</a></strong>
             <ul>
                 {% for key, value in car.items%}
                     <li>{{key}}: {{value}}</li>
@@ -18,5 +19,5 @@
     {% endfor%}
 </ol>
 {% endif %}
-</body>
-</html>
+
+{% endblock %}
