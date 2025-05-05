@@ -10,7 +10,7 @@
 
         header {
             color: white;
-            background-color: #333
+            background: aqua;
         }
 
         footer {
@@ -20,20 +20,19 @@
             padding: 20px;
         }
 
-        ul {
+        nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
-        }
-        div{
-            float: left;
-        }
-        li {
-<!--            float: left;-->
+            background-color: #333;
         }
 
-        li a {
+        nav ul li {
+            float: left;
+        }
+
+        nav ul li a {
             display: block;
             color: white;
             text-align: center;
@@ -41,10 +40,12 @@
             text-decoration: none;
         }
 
-        li a:hover {
+        nav ul li a:hover {
             background-color: #111;
         }
+
     </style>
+    {%block style%} {%endblock%}
 </head>
 <body>
 <header>
