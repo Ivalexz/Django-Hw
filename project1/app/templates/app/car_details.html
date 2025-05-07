@@ -20,6 +20,6 @@
 {% else %}
     <h2>Помилка! Машину з ID {{car_id}} не знайдено</h2>
 {% endif %}
-<a href="{% url 'app:show_info' %}"> <= Back to car list</a>
+<a href="{% url 'app:show_info' %}" class="btn back-link">Назад до списку</a>
 
 {% endblock %}

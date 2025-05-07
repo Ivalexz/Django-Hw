@@ -2,7 +2,7 @@ from django.contrib.gis.geos.libgeos import CONTEXT_PTR
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from project1.app.forms import CarSearchForm
+from project1.app.forms import CarSearchForm, AddCarForm, DeleteCarForm, UpdateCarForm
 
 cars = {
     1: {
@@ -58,6 +58,69 @@ def search_cars(request):
     }
     return render(request, 'app/search_cars.html', context)
 
+def add_car(request):
+    form=AddCarForm(request.POST or None)
+
+    if form.is_valid():
+        brand=form.cleaned_data.get('brand')
+        model = form.cleaned_data.get('model')
+        year = form.cleaned_data.get('year')
+        price = form.cleaned_data.get('price')
+
+        next_id = max(cars.keys()) + 1
+        cars[next_id]={
+            "Марка": brand,
+            "Модель": model,
+            "Рік": year,
+            "Ціна": price
+        }
+
+    context={
+        "form":form
+    }
+
+    return  render(request, "app/add_car.html", context)
+
+def delete_car(request):
+    form=DeleteCarForm(request.POST or None)
+    if form.is_valid():
+        ID=form.cleaned_data.get('ID')
+        if ID in cars.keys():
+            cars.pop(ID)
+        else:
+            return HttpResponse("Такого ID неіснує")
+
+    context = {
+        "form": form
+    }
+
+    return render(request, "app/delete_car.html", context)
+
+def update_car(request, ID=None):
+    form=UpdateCarForm(request.POST or None)
+
+    if form.is_valid():
+        brand=form.cleaned_data.get('brand') or None
+        model = form.cleaned_data.get('model') or None
+        year = form.cleaned_data.get('year') or None
+        price = form.cleaned_data.get('price') or None
+
+        fields_arr = {
+            "Марка": brand,
+            "Модель": model,
+            "Рік": year,
+            "Ціна": price
+        }
+        if ID:
+            for k in cars[ID].keys():
+                if fields_arr[k] is not None:
+                    cars[ID][k] = fields_arr[k]
+
+    context={
+        "form":form
+    }
+
+    return render(request, "app/update_car.html", context)
 
 def hello_world(request):
     # return HttpResponse("Hello world of Web Development!")

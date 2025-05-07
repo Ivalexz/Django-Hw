@@ -9,15 +9,19 @@
 <ol>
     {% for car_id, car in cars.items%}
         <li>
-            <strong><a href="{% url 'app:show_car_by_id' car_id=car_id %}">ID: {{car_id}}</a></strong>
+            <a href="{% url 'app:show_car_by_id' car_id=car_id %}" class="id-link">ID: {{car_id}}</a>
             <ul>
                 {% for key, value in car.items%}
                     <li>{{key}}: {{value}}</li>
                 {% endfor%}
+                <a href="{% url 'app:delete_car' %}" class="btn btn-delete">Видалити</a>
+                <a href="{% url 'app:update_car' ID=car_id %}" class="btn btn-update">Оновити</a>
             </ul>
         </li>
     {% endfor%}
 </ol>
 {% endif %}
+
+<a href="{% url 'app:add_car' %}" class="btn back-link">Додати автомобіль</a>
 
 {% endblock %}
